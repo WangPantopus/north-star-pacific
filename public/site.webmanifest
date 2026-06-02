@@ -1,0 +1,14 @@
+{
+  "name": "North Star Pacific",
+  "short_name": "North Star",
+  "description": "Business technology for growing businesses — custom apps, automation, AI, and dashboards.",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any" },
+    { "src": "/apple-touch-icon.png", "type": "image/png", "sizes": "180x180" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "any maskable" }
+  ],
+  "theme_color": "#0A0E1A",
+  "background_color": "#0A0E1A",
+  "display": "standalone",
+  "start_url": "/"
+}

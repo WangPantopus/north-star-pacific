@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: replace with your live domain
+Sitemap: https://northstarpacific.com/sitemap.xml

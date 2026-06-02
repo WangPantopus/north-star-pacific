@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="North Star Pacific">
+  <rect width="64" height="64" rx="14" fill="#06080F" />
+  <path
+    d="M32 5 37.6 26.4 59 32 37.6 37.6 32 59 26.4 37.6 5 32 26.4 26.4Z"
+    fill="#44E0CE"
+  />
+  <path
+    d="M32 15 35.2 28.8 49 32 35.2 35.2 32 49 28.8 35.2 15 32 28.8 28.8Z"
+    fill="#EAF1FB"
+    opacity="0.88"
+  />
+</svg>

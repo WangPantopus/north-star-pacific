@@ -1,7 +1,15 @@
-import { type CSSProperties, type ReactNode, useRef } from "react";
+import { type CSSProperties, type ReactNode, useRef, useState } from "react";
 import { useScatter } from "./canvas/useScatter";
 import { useSky } from "./canvas/useSky";
 import { useScrollReveal } from "./useScrollReveal";
+import {
+  AUDIT_PRICE,
+  BOOKING_URL,
+  CONTACT_EMAIL,
+  PAYMENT_LINK,
+} from "./config";
+import { Analytics } from "@vercel/analytics/react";
+import { track } from "@vercel/analytics";
 
 type CardContent = {
   title: string;
@@ -27,6 +35,15 @@ type PriceRow = {
 };
 
 const delay = (value: string) => ({ "--d": value }) as CSSProperties;
+
+const navItems = [
+  { label: "What we do", href: "#capabilities" },
+  { label: "Process", href: "#process" },
+  { label: "About", href: "#about" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "Audit", href: "#audit" },
+  { label: "FAQ", href: "#faq" },
+];
 
 const capabilityCards: CardContent[] = [
   {
@@ -170,17 +187,105 @@ function App() {
 
   return (
     <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <div className="grain" />
-      <Hero skyRef={skyRef} />
-      <Problem scatterRef={scatterRef} />
-      <Capabilities />
-      <Process />
-      <Trust />
-      <Audit />
-      <Pricing />
-      <FinalCta />
+      <SiteHeader />
+      <main id="main" tabIndex={-1}>
+        <Hero skyRef={skyRef} />
+        <Problem scatterRef={scatterRef} />
+        <Capabilities />
+        <Process />
+        <Trust />
+        <About />
+        <Audit />
+        <Pricing />
+        <Faq />
+        <FinalCta />
+        <BookAudit />
+      </main>
       <Footer />
+      <Analytics />
     </>
+  );
+}
+
+function SiteHeader() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const closeMenu = () => setIsMenuOpen(false);
+
+  return (
+    <header className={`site-header${isMenuOpen ? " is-open" : ""}`}>
+      <div className="header-shell">
+        <a
+          className="header-brand"
+          href="#home"
+          aria-label="North Star Pacific home"
+          onClick={closeMenu}
+        >
+          <svg className="header-star" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 1 14.1 9.9 23 12 14.1 14.1 12 23 9.9 14.1 1 12 9.9 9.9Z" />
+          </svg>
+          <span>North Star Pacific</span>
+        </a>
+
+        <nav className="header-nav" aria-label="Primary">
+          {navItems.map((item) => (
+            <a href={item.href} key={item.href}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="header-actions">
+          <a className="header-cta" href="#book" onClick={closeMenu}>
+            <span className="cta-full">Book audit</span>
+            <span className="cta-short">Book</span>
+          </a>
+          <button
+            className="header-menu"
+            type="button"
+            aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
+            aria-controls="mobile-navigation"
+            aria-expanded={isMenuOpen}
+            onClick={() => setIsMenuOpen((current) => !current)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
+
+        <nav
+          className={`mobile-nav${isMenuOpen ? " is-open" : ""}`}
+          id="mobile-navigation"
+          aria-label="Mobile"
+          style={
+            isMenuOpen
+              ? {
+                  maxHeight: "320px",
+                  padding: "0.7rem",
+                  borderColor: "rgba(234,241,251,0.12)",
+                  opacity: 1,
+                  transition: "none",
+                  visibility: "visible",
+                }
+              : undefined
+          }
+        >
+          {navItems.map((item) => (
+            <a href={item.href} key={item.href} onClick={closeMenu}>
+              {item.label}
+            </a>
+          ))}
+          <a className="mobile-nav-cta" href="#book" onClick={closeMenu}>
+            Book a Business Technology Growth Audit
+          </a>
+        </nav>
+      </div>
+    </header>
   );
 }
 
@@ -190,7 +295,7 @@ function Hero({
   skyRef: React.RefObject<HTMLCanvasElement | null>;
 }) {
   return (
-    <section className="hero" data-screen-label="Hero">
+    <section className="hero" id="home" data-screen-label="Hero">
       <canvas ref={skyRef} id="sky" aria-hidden="true" />
 
       <span className="hud-corner tl" />
@@ -218,7 +323,7 @@ function Hero({
           </p>
 
           <div className="cta-row reveal" style={delay(".6s")}>
-            <a className="btn btn-primary" href="#audit">
+            <a className="btn btn-primary" href="#book">
               Book a Growth Audit — from $1,500
             </a>
             <a className="btn btn-ghost" href="#capabilities">
@@ -359,6 +464,72 @@ function Trust() {
   );
 }
 
+const aboutPath = [
+  {
+    title: "Planetary science",
+    sub: "NASA’s Dawn mission · the dwarf planet Ceres",
+  },
+  {
+    title: "Self-taught engineer",
+    sub: "then started shipping real products",
+  },
+  {
+    title: "Eight industries",
+    sub: "U.S. Army · Meta · Apple · LinkedIn · TuSimple · Expedia · Nike · Futu",
+  },
+  {
+    title: "The frontier",
+    sub: "building at the AI edge today",
+  },
+];
+
+function About() {
+  return (
+    <section className="about" id="about" data-screen-label="About">
+      <div className="about-inner">
+        <SectionTag label="Who’s behind it" delayValue="0s" />
+
+        <div className="about-grid">
+          <div className="about-lead">
+            <h2 className="about-headline scroll-reveal" style={delay(".05s")}>
+              I’ve only ever wanted to do one thing —{" "}
+              <span className="accent-cyan">go to the edge, and ship.</span>
+            </h2>
+            <p className="about-body scroll-reveal" style={delay(".12s")}>
+              I got my start in planetary science — researching NASA’s Dawn
+              mission and the dwarf planet Ceres. Then I taught myself to code.
+            </p>
+            <p className="about-body scroll-reveal" style={delay(".18s")}>
+              Since then I’ve shipped products across eight industries. The job
+              never changed: go where the technology is newest, find the real
+              problem, and build something that works. Today I’m doing it at the
+              AI frontier — including for growing businesses, through North Star
+              Pacific.
+            </p>
+            <p className="about-quote scroll-reveal" style={delay(".24s")}>
+              “Find the real problem. Build something that works.”
+            </p>
+          </div>
+
+          <div className="about-panel scroll-reveal" style={delay(".1s")}>
+            <CornerTicks />
+            <span className="path-label">The path</span>
+            <ul className="path">
+              {aboutPath.map((step) => (
+                <li className="path-item" key={step.title}>
+                  <span className="path-node" aria-hidden="true" />
+                  <span className="path-title">{step.title}</span>
+                  <span className="path-sub">{step.sub}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Audit() {
   return (
     <section className="audit" id="audit" data-screen-label="Growth Audit">
@@ -395,7 +566,7 @@ function Audit() {
                 </span>
               </div>
 
-              <a className="btn btn-gold" href="#contact">
+              <a className="btn btn-gold" href="#book">
                 Book your audit <span className="arr">→</span>
               </a>
             </div>
@@ -458,6 +629,67 @@ function Pricing() {
   );
 }
 
+const faqItems = [
+  {
+    q: "Do you only do automation?",
+    a: "No. We build custom apps, rebuild and modernize old software, set up marketing and CRM systems, add AI tools, build dashboards and integrations, and automate operations. Automation is one of six things we do.",
+  },
+  {
+    q: "What if I don’t know what we actually need?",
+    a: "That’s exactly what the Growth Audit is for. We find the highest-value opportunity in your business before you commit to building anything — and you keep the roadmap either way.",
+  },
+  {
+    q: "Can you improve an app or system we already have?",
+    a: "Yes. We review, redesign, rebuild, modernize, or add features to existing apps, portals, internal tools, dashboards, and workflows — you don’t have to start from scratch.",
+  },
+  {
+    q: "Do you publish your pricing?",
+    a: "Yes. We publish starting prices because you deserve clarity up front. Final pricing depends on scope, integrations, data, timeline, and support level — which the audit pins down precisely.",
+  },
+  {
+    q: "How long does it take?",
+    a: "The Growth Audit typically takes 5 to 10 business days. Build timelines depend on scope and are confirmed in a written Statement of Work before any work starts.",
+  },
+  {
+    q: "Is our data safe with you?",
+    a: "Yes. We access only what’s needed, review access and data flows before touching sensitive systems, and hand over documentation and ownership of the work. Security is part of how we deliver, not an afterthought.",
+  },
+  {
+    q: "Do you provide ongoing support?",
+    a: "Yes. Our monthly Technology Partner plans cover maintenance, optimization, reporting, and continued improvements once your system is live.",
+  },
+];
+
+function Faq() {
+  return (
+    <section className="faq" id="faq" data-screen-label="FAQ">
+      <div className="faq-inner">
+        <SectionTag number="05" label="Questions" delayValue="0s" />
+        <h2 className="faq-lead scroll-reveal" style={delay(".06s")}>
+          Answers, before you ask.
+        </h2>
+        <div className="faq-list">
+          {faqItems.map((item, index) => (
+            <details
+              className="faq-item scroll-reveal"
+              style={delay(`${(0.05 + index * 0.05).toFixed(2)}s`)}
+              key={item.q}
+            >
+              <summary className="faq-q">
+                <span>{item.q}</span>
+                <span className="faq-icon" aria-hidden="true" />
+              </summary>
+              <div className="faq-a">
+                <p>{item.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FinalCta() {
   return (
     <section className="final-cta" id="start" data-screen-label="Final CTA">
@@ -496,12 +728,419 @@ function FinalCta() {
           the one technology opportunity actually worth pursuing.
         </p>
         <div className="cta-row cta-center">
-          <a className="btn btn-primary" href="#audit">
+          <a className="btn btn-primary" href="#book">
             Book a Growth Audit — from $1,500
           </a>
-          <a className="btn btn-ghost" href="#contact">
+          <a className="btn btn-ghost" href="#book">
             Talk through your problem <span className="arr">→</span>
           </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const NEED_OPTIONS = [
+  "Build a new app or tool",
+  "Improve or rebuild an existing app",
+  "Automate manual / repetitive work",
+  "Improve marketing & lead systems",
+  "Add AI tools or assistants",
+  "Connect tools / build dashboards",
+  "Improve customer experience",
+  "Not sure yet — help me figure it out",
+];
+
+const BUDGET_OPTIONS = [
+  "Just the audit (from $1,500)",
+  "$2.5k–$5k",
+  "$5k–$15k",
+  "$15k+",
+  "Ongoing monthly support",
+  "Not sure yet",
+];
+
+const TIMELINE_OPTIONS = [
+  "Now",
+  "Within 30 days",
+  "Within 90 days",
+  "Later / just exploring",
+];
+
+type LeadForm = {
+  name: string;
+  email: string;
+  business: string;
+  need: string;
+  pain: string;
+  tools: string;
+  budget: string;
+  timeline: string;
+  company_website: string;
+};
+
+const emptyLead: LeadForm = {
+  name: "",
+  email: "",
+  business: "",
+  need: "",
+  pain: "",
+  tools: "",
+  budget: "",
+  timeline: "",
+  company_website: "",
+};
+
+type LeadStatus = "idle" | "submitting" | "success" | "invalid" | "error";
+
+function BookAudit() {
+  const [form, setForm] = useState<LeadForm>(emptyLead);
+  const [status, setStatus] = useState<LeadStatus>("idle");
+
+  const update =
+    (field: keyof LeadForm) =>
+    (
+      event: React.ChangeEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >,
+    ) =>
+      setForm((prev) => ({ ...prev, [field]: event.target.value }));
+
+  const mailtoHref = () => {
+    const subject = `Growth Audit enquiry — ${form.name || "new lead"}`;
+    const lines = [
+      `Name: ${form.name}`,
+      `Email: ${form.email}`,
+      `Business: ${form.business}`,
+      `Needs help with: ${form.need}`,
+      `Budget: ${form.budget}`,
+      `Timeline: ${form.timeline}`,
+      `Current tools: ${form.tools}`,
+      "",
+      "Biggest pain:",
+      form.pain,
+    ];
+    return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(lines.join("\n"))}`;
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const emailLooksValid = /.+@.+\..+/.test(form.email);
+    if (!form.name.trim() || !emailLooksValid || !form.need) {
+      setStatus("invalid");
+      return;
+    }
+    setStatus("submitting");
+    try {
+      const response = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!response.ok) {
+        throw new Error(`Request failed with ${response.status}`);
+      }
+      setStatus("success");
+      track("lead_submitted", { need: form.need || "unspecified" });
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  const firstName = form.name.trim().split(" ")[0];
+
+  return (
+    <section className="book" id="book" data-screen-label="Book your audit">
+      <span className="book-glow" aria-hidden="true" />
+      <div className="book-inner">
+        <SectionTag number="06" label="Book your audit" delayValue="0s" />
+
+        <div className="book-grid">
+          <div className="book-lead scroll-reveal" style={delay(".06s")}>
+            <h2 className="book-headline">
+              Tell us what&rsquo;s going on —{" "}
+              <span className="accent-cyan">
+                we&rsquo;ll reply within one business day.
+              </span>
+            </h2>
+            <p className="book-body">
+              Share a little about your business and where it hurts. No
+              obligation, no pressure — and you&rsquo;ll leave the audit with a
+              roadmap you keep either way.
+            </p>
+
+            <ul className="book-points">
+              <li className="book-point">
+                <span className="check-mark" aria-hidden="true">
+                  <CheckIcon />
+                </span>
+                <span>
+                  A real person reads every message — no bots, no call center.
+                </span>
+              </li>
+              <li className="book-point">
+                <span className="check-mark" aria-hidden="true">
+                  <CheckIcon />
+                </span>
+                <span>
+                  A clear next step: a short call to scope your {AUDIT_PRICE}{" "}
+                  Growth Audit.
+                </span>
+              </li>
+              <li className="book-point">
+                <span className="check-mark" aria-hidden="true">
+                  <CheckIcon />
+                </span>
+                <span>Your details stay private — never sold, never shared.</span>
+              </li>
+            </ul>
+
+            {BOOKING_URL || PAYMENT_LINK ? (
+              <div className="book-alt">
+                {BOOKING_URL ? (
+                  <a
+                    className="btn btn-ghost"
+                    href={BOOKING_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => track("book_call_click")}
+                  >
+                    Rather pick a time? Book a call{" "}
+                    <span className="arr">→</span>
+                  </a>
+                ) : null}
+                {PAYMENT_LINK ? (
+                  <a
+                    className="btn btn-gold"
+                    href={PAYMENT_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => track("payment_click")}
+                  >
+                    Ready now? Start your audit ({AUDIT_PRICE})
+                  </a>
+                ) : null}
+              </div>
+            ) : null}
+
+            <p className="book-direct">
+              Prefer email?{" "}
+              <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+            </p>
+          </div>
+
+          <div className="book-card">
+            <CornerTicks />
+            {status === "success" ? (
+              <div className="book-success" role="status">
+                <span className="book-success-mark" aria-hidden="true">
+                  <CheckIcon />
+                </span>
+                <h3 className="book-success-title">Message received.</h3>
+                <p className="book-success-body">
+                  Thanks{firstName ? `, ${firstName}` : ""} — we&rsquo;ll be in
+                  touch within one business day. Keep an eye on your inbox.
+                </p>
+                {BOOKING_URL ? (
+                  <a
+                    className="btn btn-primary"
+                    href={BOOKING_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => track("book_call_click")}
+                  >
+                    Want to go faster? Book a time now
+                  </a>
+                ) : null}
+              </div>
+            ) : (
+              <form className="book-form" onSubmit={handleSubmit} noValidate>
+                <div className="field-row">
+                  <label className="field">
+                    <span className="field-label">
+                      Your name <span className="req">*</span>
+                    </span>
+                    <input
+                      className="field-input"
+                      type="text"
+                      name="name"
+                      value={form.name}
+                      onChange={update("name")}
+                      autoComplete="name"
+                      aria-required="true"
+                    />
+                  </label>
+                  <label className="field">
+                    <span className="field-label">
+                      Email <span className="req">*</span>
+                    </span>
+                    <input
+                      className="field-input"
+                      type="email"
+                      name="email"
+                      value={form.email}
+                      onChange={update("email")}
+                      autoComplete="email"
+                      aria-required="true"
+                    />
+                  </label>
+                </div>
+
+                <label className="field">
+                  <span className="field-label">Business name</span>
+                  <input
+                    className="field-input"
+                    type="text"
+                    name="business"
+                    value={form.business}
+                    onChange={update("business")}
+                    autoComplete="organization"
+                  />
+                </label>
+
+                <label className="field">
+                  <span className="field-label">
+                    What do you need help with? <span className="req">*</span>
+                  </span>
+                  <select
+                    className="field-input"
+                    name="need"
+                    value={form.need}
+                    onChange={update("need")}
+                    aria-required="true"
+                  >
+                    <option value="" disabled>
+                      Select one…
+                    </option>
+                    {NEED_OPTIONS.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <label className="field">
+                  <span className="field-label">
+                    What&rsquo;s the biggest pain right now?
+                  </span>
+                  <textarea
+                    className="field-input field-textarea"
+                    name="pain"
+                    rows={3}
+                    value={form.pain}
+                    onChange={update("pain")}
+                    placeholder="In your words — what's slow, broken, manual, or unclear?"
+                  />
+                </label>
+
+                <div className="field-row">
+                  <label className="field">
+                    <span className="field-label">Budget comfort</span>
+                    <select
+                      className="field-input"
+                      name="budget"
+                      value={form.budget}
+                      onChange={update("budget")}
+                    >
+                      <option value="">Select…</option>
+                      {BUDGET_OPTIONS.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label className="field">
+                    <span className="field-label">Timeline</span>
+                    <select
+                      className="field-input"
+                      name="timeline"
+                      value={form.timeline}
+                      onChange={update("timeline")}
+                    >
+                      <option value="">Select…</option>
+                      {TIMELINE_OPTIONS.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+
+                <label className="field">
+                  <span className="field-label">
+                    Tools you use now{" "}
+                    <span className="field-opt">(optional)</span>
+                  </span>
+                  <input
+                    className="field-input"
+                    type="text"
+                    name="tools"
+                    value={form.tools}
+                    onChange={update("tools")}
+                    placeholder="CRM, scheduling, spreadsheets, website…"
+                  />
+                </label>
+
+                {/* honeypot — hidden from people, catches bots */}
+                <input
+                  className="hp-field"
+                  type="text"
+                  name="company_website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  value={form.company_website}
+                  onChange={update("company_website")}
+                />
+
+                <button
+                  className="btn btn-gold book-submit"
+                  type="submit"
+                  disabled={status === "submitting"}
+                >
+                  {status === "submitting" ? (
+                    "Sending…"
+                  ) : (
+                    <>
+                      Send &amp; start the conversation{" "}
+                      <span className="arr">→</span>
+                    </>
+                  )}
+                </button>
+
+                {status === "invalid" ? (
+                  <p className="book-error" role="alert">
+                    Please add your name, a valid email, and what you need help
+                    with.
+                  </p>
+                ) : null}
+                {status === "error" ? (
+                  <p className="book-error" role="alert">
+                    Couldn&rsquo;t submit automatically.{" "}
+                    <a href={mailtoHref()}>Click here to email us instead</a> —
+                    your answers come along.
+                  </p>
+                ) : null}
+
+                <p className="book-fineprint">
+                  By submitting, you agree to our{" "}
+                  <a
+                    href="/privacy.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Privacy Policy
+                  </a>
+                  .
+                </p>
+              </form>
+            )}
+          </div>
         </div>
       </div>
     </section>
@@ -530,8 +1169,11 @@ function Footer() {
             <a href="#capabilities">What we do</a>
             <a href="#process">How we work</a>
             <a href="#trust">Why us</a>
+            <a href="#about">About</a>
             <a href="#pricing">Pricing</a>
-            <a href="#audit">Book an audit</a>
+            <a href="#book">Book an audit</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
           </nav>
         </div>
 
@@ -698,4 +1340,3 @@ function CheckIcon() {
 }
 
 export default App;
-
