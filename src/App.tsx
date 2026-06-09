@@ -6,7 +6,6 @@ import {
   AUDIT_PRICE,
   BOOKING_URL,
   CONTACT_EMAIL,
-  PAYMENT_LINK,
 } from "./config";
 import { Analytics } from "@vercel/analytics/react";
 import { track } from "@vercel/analytics";
@@ -38,47 +37,48 @@ const delay = (value: string) => ({ "--d": value }) as CSSProperties;
 
 const navItems = [
   { label: "What we do", href: "#capabilities" },
-  { label: "Process", href: "#process" },
+  { label: "How it works", href: "#process" },
+  { label: "AI Audit", href: "#audit" },
+  { label: "Why us", href: "#trust" },
   { label: "About", href: "#about" },
   { label: "Pricing", href: "#pricing" },
-  { label: "Audit", href: "#audit" },
   { label: "FAQ", href: "#faq" },
 ];
 
 const capabilityCards: CardContent[] = [
   {
-    title: "Custom Apps & Software",
-    copy: "Customer portals, staff tools, booking platforms, web and mobile apps — built around how your business actually works.",
-    icon: <CodeIcon />,
+    title: "AI Opportunity & Readiness",
+    copy: "Map high-value use cases across product and operations. Rank them by impact, effort, risk, data readiness, and adoption requirements, with honest buy / build / wait recommendations.",
+    icon: <CompassIcon />,
     delay: ".05s",
   },
   {
-    title: "App Rebuilds & Modernization",
-    copy: "Turn slow, outdated, frustrating software into something fast, clear, and reliable.",
+    title: "Team AI Enablement",
+    copy: "Give each team approved tools, role-specific training, playbooks, guardrails, and human-review practices so AI becomes a repeatable capability instead of individual experimentation.",
+    icon: <MedalIcon />,
+    delay: ".11s",
+  },
+  {
+    title: "AI Workflow Automation",
+    copy: "Automate repetitive work in sales, service, intake, operations, reporting, proposals, documents, and back-office processes, connected to the tools your team already uses.",
+    icon: <AutomationIcon />,
+    delay: ".17s",
+  },
+  {
+    title: "Custom AI & Business Software",
+    copy: "Build copilots, knowledge assistants, search, recommendations, customer features, internal tools, portals, and apps when off-the-shelf products are not enough.",
+    icon: <AiIcon />,
+    delay: ".05s",
+  },
+  {
+    title: "Data, Integrations & Modernization",
+    copy: "Connect systems, improve data access, modernize outdated apps, and remove technical bottlenecks that prevent AI and automation from working reliably.",
     icon: <RefreshIcon />,
     delay: ".11s",
   },
   {
-    title: "Revenue & Marketing Tech",
-    copy: "Lead capture, CRM, email and SMS follow-up, reviews, and conversion tracking — working together to bring in more business.",
-    icon: <TrendIcon />,
-    delay: ".17s",
-  },
-  {
-    title: "Operations Automation",
-    copy: "Scheduling, intake, approvals, reminders, documents, invoice follow-up — the repetitive work, handled automatically.",
-    icon: <AutomationIcon />,
-    delay: ".05s",
-  },
-  {
-    title: "AI Tools & Assistants",
-    copy: "Practical AI for support, intake, proposals, reporting, and admin — set up safely, with your data protected.",
-    icon: <AiIcon />,
-    delay: ".11s",
-  },
-  {
-    title: "Data, Dashboards & Integrations",
-    copy: "Connect your tools and finally see the numbers that matter, in one place you can trust.",
+    title: "Production Launch & Optimization",
+    copy: "Take ideas and pilots into dependable use with testing, security controls, documentation, team rollout, adoption tracking, KPI measurement, and ongoing improvement.",
     icon: <DashboardIcon />,
     delay: ".17s",
   },
@@ -87,92 +87,104 @@ const capabilityCards: CardContent[] = [
 const processSteps: ProcessStep[] = [
   {
     number: "01",
-    title: "Diagnose",
-    copy: "We map your tools, workflows, apps, data, and bottlenecks.",
+    title: "Discover",
+    copy: "We map business goals, workflows, current AI usage, tools, data, and constraints.",
     delay: ".05s",
   },
   {
     number: "02",
     title: "Prioritize",
-    copy: "We score opportunities by revenue, time, risk, and effort.",
+    copy: "We score opportunities by business impact, effort, risk, readiness, and adoption, then recommend buy, build, or wait.",
     delay: ".14s",
   },
   {
     number: "03",
-    title: "Build",
-    copy: "We put the single highest-value system in place first.",
+    title: "Enable",
+    copy: "We establish approved tools, guardrails, ownership, role-specific training, and practical playbooks.",
     delay: ".23s",
   },
   {
     number: "04",
-    title: "Train & launch",
-    copy: "We document, test, train your team, and support the rollout.",
+    title: "Implement",
+    copy: "We integrate or build the highest-value workflow or system and make it dependable for real use.",
     delay: ".32s",
   },
   {
     number: "05",
-    title: "Optimize",
-    copy: "We measure and improve as your business changes.",
+    title: "Launch & measure",
+    copy: "We support rollout, establish baselines, track adoption and business results, and improve from there.",
     delay: ".41s",
   },
 ];
 
 const trustCards: CardContent[] = [
   {
-    title: "Built by people from Meta, Apple & LinkedIn",
-    copy: "The same caliber of software the biggest tech companies run on, focused entirely on your business.",
+    title: "Founder-led production engineering",
+    copy: "Led by an engineer with production software experience at the U.S. Army, Expedia, Meta, Apple, and LinkedIn, focused on reliable systems rather than flashy demos.",
     icon: <MedalIcon />,
     delay: ".12s",
   },
   {
-    title: "A roadmap before any build",
-    copy: "We don't sell you software you don't need. The audit shows you what's worth doing — and what isn't — before you spend a dollar building.",
+    title: "Advice that can become working software",
+    copy: "We can assess, train, integrate, modernize, and build, so the roadmap does not stop at a slide deck.",
     icon: <CompassIcon />,
     delay: ".19s",
   },
   {
-    title: "The work is yours either way",
-    copy: "Clear scope, clear pricing, and a roadmap you keep whether or not you build with us.",
+    title: "Designed for adoption and results",
+    copy: "Every engagement includes clear ownership, documentation, guardrails, team enablement, and success measures. You keep the work either way.",
     icon: <DocumentIcon />,
     delay: ".26s",
   },
 ];
 
 const deliverables = [
-  "A map of your current tools and workflows",
-  "A pain map — where revenue, time, and trust are leaking",
-  "An opportunity scorecard, ranked by impact and effort",
-  "Your recommended first project, with a real budget range",
-  "A 30- and 90-day roadmap",
+  "A map of current AI usage, tools, workflows, data, and bottlenecks",
+  "The 1–3 highest-value AI opportunities, ranked by impact, effort, risk, and readiness",
+  "An honest buy / build / wait recommendation for each priority",
+  "A concrete implementation plan for the top opportunity",
+  "Team enablement, governance, and adoption requirements",
+  "Success metrics, budget range, timeline, and a 30- and 90-day roadmap",
 ];
 
 const priceRows: PriceRow[] = [
   {
-    name: "Growth Audit",
-    description: "Roadmap and first recommended project.",
-    price: "$1,500",
+    name: "AI Opportunity Audit",
+    description:
+      "A focused opportunity, readiness, and implementation roadmap for one business area.",
+    price: "$2,500",
     flag: "The front door",
     featured: true,
   },
   {
-    name: "Quick Win System",
-    description: "One focused automation, integration, dashboard, or tool.",
-    price: "$2,500",
-  },
-  {
-    name: "Improvement Sprint",
-    description: "A meaningful upgrade to an existing app or workflow.",
+    name: "AI Team Enablement Sprint",
+    description:
+      "Role-based training, approved tools, playbooks, guardrails, and first repeatable workflows.",
     price: "$5,000",
   },
   {
-    name: "Custom Build",
-    description: "A custom app, portal, or integrated business system.",
-    price: "$12,000",
+    name: "AI Workflow Quick Build",
+    description:
+      "One focused automation, assistant, integration, or AI feature shipped into real use.",
+    price: "$8,000",
   },
   {
-    name: "Technology Partner",
-    description: "Ongoing support, optimization, and improvement.",
-    price: "$1,000",
+    name: "AI Implementation Sprint",
+    description:
+      "A meaningful AI system or modernization project across workflows, apps, data, and integrations.",
+    price: "$20,000",
+  },
+  {
+    name: "Custom AI / Business System",
+    description:
+      "A substantial production system, customer feature, internal platform, or app rebuild.",
+    price: "$40,000",
+  },
+  {
+    name: "AI Operating Partner",
+    description:
+      "Ongoing enablement, implementation, governance, monitoring, optimization, and support.",
+    price: "$5,000",
     period: "/mo",
   },
 ];
@@ -196,6 +208,7 @@ function App() {
         <Hero skyRef={skyRef} />
         <Problem scatterRef={scatterRef} />
         <Capabilities />
+        <UseCases />
         <Process />
         <Trust />
         <About />
@@ -213,6 +226,8 @@ function App() {
 
 function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerCtaHref = BOOKING_URL || "#book";
+  const headerCtaExternal = Boolean(BOOKING_URL);
 
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -240,9 +255,16 @@ function SiteHeader() {
         </nav>
 
         <div className="header-actions">
-          <a className="header-cta" href="#book" onClick={closeMenu}>
-            <span className="cta-full">Book audit</span>
-            <span className="cta-short">Book</span>
+          <a
+            className="header-cta"
+            href={headerCtaHref}
+            onClick={closeMenu}
+            {...(headerCtaExternal
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+          >
+            <span className="cta-full">Book an AI Opportunity Call</span>
+            <span className="cta-short">Book an AI Opportunity Call</span>
           </a>
           <button
             className="header-menu"
@@ -280,8 +302,15 @@ function SiteHeader() {
               {item.label}
             </a>
           ))}
-          <a className="mobile-nav-cta" href="#book" onClick={closeMenu}>
-            Book a Business Technology Growth Audit
+          <a
+            className="mobile-nav-cta"
+            href={headerCtaHref}
+            onClick={closeMenu}
+            {...(headerCtaExternal
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+          >
+            Book an AI Opportunity Call
           </a>
         </nav>
       </div>
@@ -307,36 +336,37 @@ function Hero({
         <div className="hero-content">
           <span className="eyebrow reveal" style={delay(".1s")}>
             <span className="dot" />
-            Business technology for growing businesses
+            AI enablement + implementation for growing companies
           </span>
 
           <h1 className="headline reveal" style={delay(".25s")}>
-            Build, improve, and automate the technology your business needs to{" "}
-            <span className="grow">grow.</span>
+            Turn AI from scattered experiments into a{" "}
+            <span className="grow">working part of your business.</span>
           </h1>
 
           <p className="subhead reveal" style={delay(".45s")}>
-            From custom apps and modernizing old systems to automating
-            operations, sharpening your marketing, and putting AI to work — we
-            help small and mid-sized businesses make more money, save time, and
-            run better.
+            North Star Pacific helps growing companies find high-value AI
+            opportunities, train teams, automate workflows, and build production
+            systems that improve revenue, productivity, and customer
+            experience. When existing apps, data, or integrations stand in the
+            way, we modernize those too.
           </p>
 
           <div className="cta-row reveal" style={delay(".6s")}>
             <a className="btn btn-primary" href="#book">
-              Book a Growth Audit — from $1,500
+              Book an AI Opportunity Call
             </a>
             <a className="btn btn-ghost" href="#capabilities">
-              See what we can do <span className="arr">→</span>
+              See how we help <span className="arr">→</span>
             </a>
           </div>
 
           <div className="microcopy reveal" style={delay(".75s")}>
-            <span>Clear starting prices.</span>
+            <span>Clear priorities before any build.</span>
             <span className="sep">/</span>
-            <span>A practical roadmap before any project.</span>
+            <span>Honest buy, build, or wait advice.</span>
             <span className="sep">/</span>
-            <span>No tech overwhelm.</span>
+            <span>Training, implementation, and measurement.</span>
           </div>
         </div>
       </div>
@@ -357,31 +387,41 @@ function Problem({
           <SectionTag label="The problem" delayValue="0s" />
 
           <h2 className="thesis scroll-reveal" style={delay(".1s")}>
-            Most businesses don't need more tools. They need the right systems.
+            Most companies do not have an AI tool problem. They have an adoption
+            and implementation problem.
           </h2>
 
           <div className="maybes">
             <p className="maybe scroll-reveal" style={delay(".15s")}>
-              Maybe your app is outdated.
+              Your employees are experimenting, but useful practices are not
+              spreading.
             </p>
             <p className="maybe scroll-reveal" style={delay(".25s")}>
-              Maybe your team repeats the same work by hand.
+              Promising ideas are stuck in pilots, prompt documents, or one
+              person&rsquo;s account.
             </p>
             <p className="maybe scroll-reveal" style={delay(".35s")}>
-              Maybe your marketing doesn't connect to your sales.
+              Important workflows still depend on repetitive work and
+              disconnected tools.
             </p>
             <p className="maybe scroll-reveal" style={delay(".45s")}>
-              Maybe your reports live in five different places.
+              Your existing apps and data are not ready for the AI experience you
+              want.
             </p>
             <p className="maybe scroll-reveal" style={delay(".55s")}>
-              Maybe AI sounds useful, but nobody knows where to put it.
+              Leadership cannot see which AI efforts create value, introduce
+              risk, or deserve investment.
             </p>
           </div>
 
           <p className="closing scroll-reveal" style={delay(".65s")}>
-            We help you find the{" "}
-            <span className="accent-cyan">single highest-value opportunity</span>{" "}
-            in your business — and put it to work the right way.
+            We close the gap between{" "}
+            <span className="accent-cyan">&ldquo;we should use AI&rdquo;</span>{" "}
+            and{" "}
+            <span className="accent-cyan">
+              &ldquo;our team uses it, it works, and we can measure the
+              result.&rdquo;
+            </span>
           </p>
         </div>
       </div>
@@ -399,6 +439,16 @@ function Capabilities() {
       <div className="cap-inner">
         <SectionTag number="01" label="What we do" delayValue="0s" />
 
+        <h2 className="trust-lead scroll-reveal" style={delay(".05s")}>
+          From opportunity to adoption to production.
+        </h2>
+        <p className="about-body scroll-reveal" style={delay(".1s")}>
+          We help you choose the right use cases, prepare your people and
+          systems, and implement what is worth doing. AI is the wedge, but the
+          work may include training, automation, integrations, app
+          modernization, data improvements, and custom software.
+        </p>
+
         <div className="cap-grid">
           {capabilityCards.map((card) => (
             <FeatureCard key={card.title} card={card} />
@@ -409,11 +459,76 @@ function Capabilities() {
   );
 }
 
+const useCaseExamples = [
+  {
+    title: "Sales & marketing",
+    copy: "Research, proposal drafts, lead qualification, CRM updates, campaign and follow-up workflows",
+  },
+  {
+    title: "Customer service",
+    copy: "Knowledge assistants, ticket triage, response drafts, onboarding, and support automation",
+  },
+  {
+    title: "Operations",
+    copy: "Intake, document processing, approvals, scheduling, status updates, and reporting",
+  },
+  {
+    title: "Company knowledge",
+    copy: "Secure search across policies, SOPs, documents, and internal systems",
+  },
+  {
+    title: "Product & software",
+    copy: "Copilots, semantic search, recommendations, generation, and agent-assisted workflows",
+  },
+  {
+    title: "Leadership & data",
+    copy: "Natural-language analysis, recurring summaries, anomaly detection, and decision support",
+  },
+];
+
+function UseCases() {
+  return (
+    <section
+      className="capabilities use-cases"
+      id="use-cases"
+      data-screen-label="Common use cases"
+    >
+      <div className="cap-inner">
+        <h2 className="trust-lead scroll-reveal" style={delay(".05s")}>
+          Common places we put AI to work
+        </h2>
+
+        <div className="cap-grid">
+          {useCaseExamples.map((item, index) => (
+            <article
+              className="card scroll-reveal"
+              style={delay(`${(0.05 + index * 0.06).toFixed(2)}s`)}
+              key={item.title}
+            >
+              <CornerTicks />
+              <h3 className="card-title">{item.title}</h3>
+              <p className="card-copy">{item.copy}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Process() {
   return (
-    <section className="process" id="process" data-screen-label="How we work">
+    <section
+      className="process"
+      id="process"
+      data-screen-label="How AI becomes business capability"
+    >
       <div className="process-inner">
-        <SectionTag number="02" label="How we work" delayValue="0s" />
+        <SectionTag
+          number="02"
+          label="How AI becomes business capability"
+          delayValue="0s"
+        />
 
         <div className="process-strip">
           <span className="route" aria-hidden="true" />
@@ -443,7 +558,10 @@ function Trust() {
         <SectionTag number="03" label="Why work with us" delayValue="0s" />
 
         <h2 className="trust-lead scroll-reveal" style={delay(".08s")}>
-          New name. <span className="accent-cyan">People you can trust with it.</span>
+          AI advice is easy.{" "}
+          <span className="accent-cyan">
+            Making it work inside a real business is harder.
+          </span>
         </h2>
 
         <div className="trust-grid">
@@ -456,7 +574,7 @@ function Trust() {
           <a className="sample-link" href="#audit">
             <span className="sl-lead">See exactly what you get</span>
             <span className="sl-arr">→</span>
-            <span className="sl-main">View a sample audit</span>
+            <span className="sl-main">See the AI Opportunity Audit</span>
           </a>
         </div>
       </div>
@@ -470,16 +588,16 @@ const aboutPath = [
     sub: "NASA’s Dawn mission · the dwarf planet Ceres",
   },
   {
-    title: "Self-taught engineer",
-    sub: "then started shipping real products",
+    title: "Production engineering",
+    sub: "large-scale software, APIs, data systems, and cloud infrastructure",
   },
   {
-    title: "Eight industries",
-    sub: "U.S. Army · Meta · Apple · LinkedIn · TuSimple · Expedia · Nike · Futu",
+    title: "Across industries",
+    sub: "Meta · Apple · LinkedIn · U.S. Army · TuSimple · Expedia · Nike · Futu",
   },
   {
-    title: "The frontier",
-    sub: "building at the AI edge today",
+    title: "North Star Pacific",
+    sub: "AI enablement, workflow automation, and production implementation",
   },
 ];
 
@@ -492,22 +610,25 @@ function About() {
         <div className="about-grid">
           <div className="about-lead">
             <h2 className="about-headline scroll-reveal" style={delay(".05s")}>
-              I’ve only ever wanted to do one thing —{" "}
-              <span className="accent-cyan">go to the edge, and ship.</span>
+              Built by an engineer who knows the difference between a demo and a{" "}
+              <span className="accent-cyan">dependable system.</span>
             </h2>
             <p className="about-body scroll-reveal" style={delay(".12s")}>
-              I got my start in planetary science — researching NASA’s Dawn
-              mission and the dwarf planet Ceres. Then I taught myself to code.
+              I began in planetary science, researching NASA&rsquo;s Dawn mission
+              and the dwarf planet Ceres. Then I taught myself software
+              engineering and started building production systems.
             </p>
             <p className="about-body scroll-reveal" style={delay(".18s")}>
-              Since then I’ve shipped products across eight industries. The job
-              never changed: go where the technology is newest, find the real
-              problem, and build something that works. Today I’m doing it at the
-              AI frontier — including for growing businesses, through North Star
-              Pacific.
+              Since then, I have worked on software and data systems across
+              organizations including Meta, Apple, LinkedIn, the U.S. Army,
+              TuSimple, Expedia, Nike, and Futu. North Star Pacific brings that
+              engineering discipline to AI adoption: find the real business
+              problem, choose the right tool, build what matters, and make sure
+              people can actually use it.
             </p>
             <p className="about-quote scroll-reveal" style={delay(".24s")}>
-              “Find the real problem. Build something that works.”
+              &ldquo;Find the real problem. Build the right system. Make it
+              useful.&rdquo;
             </p>
           </div>
 
@@ -532,7 +653,7 @@ function About() {
 
 function Audit() {
   return (
-    <section className="audit" id="audit" data-screen-label="Growth Audit">
+    <section className="audit" id="audit" data-screen-label="AI Opportunity Audit">
       <span className="audit-glow" aria-hidden="true" />
 
       <div className="audit-inner">
@@ -546,28 +667,33 @@ function Audit() {
               </span>
 
               <h2 className="audit-headline">
-                Find the highest-value technology opportunity in your business —{" "}
-                <span className="audit-em">
-                  before you spend a dollar building anything.
-                </span>
+                Find where AI can create measurable value, and what it will take
+                to{" "}
+                <span className="audit-em">make it work.</span>
               </h2>
 
               <p className="audit-body">
-                You don't need to know the right answer before you talk to us. In
-                one focused engagement, we map where technology can create the
-                most value for you — then hand you a clear, prioritized roadmap
-                and a first recommended project.
+                In one focused engagement, we review your goals, workflows, tools,
+                data, current AI usage, and team readiness. We rank the
+                opportunities, give honest buy / build / wait recommendations,
+                and create a practical plan for the best first move.
               </p>
 
               <div className="audit-price">
-                <span className="audit-price-label">The Growth Audit</span>
+                <span className="audit-price-label">The AI Opportunity Audit</span>
                 <span className="audit-price-figure">
-                  From <span className="num">$1,500</span>
+                  From <span className="num">{AUDIT_PRICE}</span>
                 </span>
               </div>
 
+              <p className="audit-body audit-scope-note">
+                The {AUDIT_PRICE} starting scope covers one business function or
+                another clearly bounded area. Multi-department and company-wide
+                assessments are quoted separately.
+              </p>
+
               <a className="btn btn-gold" href="#book">
-                Book your audit <span className="arr">→</span>
+                Discuss your AI Opportunity Audit <span className="arr">→</span>
               </a>
             </div>
 
@@ -620,9 +746,11 @@ function Pricing() {
         </div>
 
         <p className="price-note scroll-reveal" style={delay(".14s")}>
-          Final pricing depends on complexity, integrations, custom needs, data,
-          timeline, and support level. The audit is how we scope it precisely —
-          together, before you commit.
+          Starting prices reflect common scopes. Final pricing depends on the
+          business area, number of stakeholders, data and integrations, security
+          requirements, production criticality, timeline, and adoption support.
+          The AI Opportunity Audit is how we establish the right first scope
+          before you commit to a larger build.
         </p>
       </div>
     </section>
@@ -631,32 +759,44 @@ function Pricing() {
 
 const faqItems = [
   {
-    q: "Do you only do automation?",
-    a: "No. We build custom apps, rebuild and modernize old software, set up marketing and CRM systems, add AI tools, build dashboards and integrations, and automate operations. Automation is one of six things we do.",
+    q: "Do you only work on AI?",
+    a: "AI enablement and implementation is our primary focus. We also modernize apps, connect systems, build custom software, improve data access, and automate operations when those capabilities are needed to make AI or another high-value workflow succeed.",
   },
   {
-    q: "What if I don’t know what we actually need?",
-    a: "That’s exactly what the Growth Audit is for. We find the highest-value opportunity in your business before you commit to building anything — and you keep the roadmap either way.",
+    q: "What if we do not know where AI belongs in our business?",
+    a: "That is exactly what the AI Opportunity Audit is for. We review your goals, workflows, tools, data, and current AI usage, then rank the best opportunities and give an honest buy / build / wait recommendation for each priority.",
   },
   {
-    q: "Can you improve an app or system we already have?",
-    a: "Yes. We review, redesign, rebuild, modernize, or add features to existing apps, portals, internal tools, dashboards, and workflows — you don’t have to start from scratch.",
+    q: "Do you only advise, or do you also build?",
+    a: "We do both. We can identify opportunities, create the roadmap, train your team, configure existing products, integrate your systems, modernize software, and build production AI or custom business tools when off-the-shelf options are not enough.",
   },
   {
-    q: "Do you publish your pricing?",
-    a: "Yes. We publish starting prices because you deserve clarity up front. Final pricing depends on scope, integrations, data, timeline, and support level — which the audit pins down precisely.",
+    q: "Can you train our team and improve AI adoption?",
+    a: "Yes. We provide role-specific training, approved-tool guidance, practical playbooks, reusable workflows, human-review standards, and rollout support so useful AI practices spread beyond a few early adopters.",
+  },
+  {
+    q: "Can you improve an app, system, or AI pilot we already have?",
+    a: "Yes. We can review, redesign, modernize, integrate, or rebuild existing apps and internal tools. We can also take an AI prototype or pilot through the reliability, data, security, adoption, and measurement work required for production use.",
+  },
+  {
+    q: "How do you handle data security and AI risk?",
+    a: "We begin with a review of data, access, and tool requirements. We minimize permissions, prefer client-owned and business-grade accounts, define what information may or may not be sent to AI systems, document human-review requirements, and scope any industry-specific security or compliance needs before implementation.",
+  },
+  {
+    q: "How do you measure whether the work is valuable?",
+    a: "We establish a baseline and success measures before implementation. Depending on the workflow, that may include time saved, cycle time, response speed, conversion, cost per task, backlog, error or rework rate, team adoption, customer satisfaction, or incremental revenue.",
+  },
+  {
+    q: "How much does it cost?",
+    a: "The AI Opportunity Audit starts at $2,500 for one clearly bounded business area. Team enablement starts at $5,000, focused AI builds at $8,000, implementation sprints at $20,000, and substantial custom systems at $40,000. Final scope and pricing are confirmed before work begins.",
   },
   {
     q: "How long does it take?",
-    a: "The Growth Audit typically takes 5 to 10 business days. Build timelines depend on scope and are confirmed in a written Statement of Work before any work starts.",
-  },
-  {
-    q: "Is our data safe with you?",
-    a: "Yes. We access only what’s needed, review access and data flows before touching sensitive systems, and hand over documentation and ownership of the work. Security is part of how we deliver, not an afterthought.",
+    a: "A focused AI Opportunity Audit typically takes 7 to 10 business days after the necessary interviews and access are scheduled. Enablement and build timelines depend on scope and are confirmed in a written Statement of Work before work begins.",
   },
   {
     q: "Do you provide ongoing support?",
-    a: "Yes. Our monthly Technology Partner plans cover maintenance, optimization, reporting, and continued improvements once your system is live.",
+    a: "Yes. AI Operating Partner engagements can include continued training, new workflow implementation, system monitoring, evaluation, governance updates, cost control, maintenance, and ongoing optimization.",
   },
 ];
 
@@ -722,17 +862,20 @@ function FinalCta() {
       </svg>
 
       <div className="final-cta-inner scroll-reveal" style={delay(".05s")}>
-        <h2 className="cta-headline">Not sure what your business needs first?</h2>
+        <h2 className="cta-headline">
+          Not sure where AI will actually pay off in your business?
+        </h2>
         <p className="cta-body">
-          That's exactly what the audit is for. Start there, and we'll show you
-          the one technology opportunity actually worth pursuing.
+          Start with a short conversation. If there is a real opportunity, the
+          AI Opportunity Audit will identify the one to three places worth
+          pursuing and give you a practical plan to implement them.
         </p>
         <div className="cta-row cta-center">
           <a className="btn btn-primary" href="#book">
-            Book a Growth Audit — from $1,500
+            Book an AI Opportunity Call
           </a>
-          <a className="btn btn-ghost" href="#book">
-            Talk through your problem <span className="arr">→</span>
+          <a className="btn btn-ghost" href="#audit">
+            See the AI Opportunity Audit <span className="arr">→</span>
           </a>
         </div>
       </div>
@@ -741,22 +884,32 @@ function FinalCta() {
 }
 
 const NEED_OPTIONS = [
-  "Build a new app or tool",
-  "Improve or rebuild an existing app",
-  "Automate manual / repetitive work",
-  "Improve marketing & lead systems",
-  "Add AI tools or assistants",
-  "Connect tools / build dashboards",
-  "Improve customer experience",
+  "Find and prioritize AI opportunities",
+  "Train our team and improve AI adoption",
+  "Automate a business workflow",
+  "Build an AI feature or internal tool",
+  "Move an AI prototype into production",
+  "Connect data and existing systems",
+  "Modernize or rebuild an existing app",
   "Not sure yet — help me figure it out",
 ];
 
+const AI_STAGE_OPTIONS = [
+  "Not using AI yet",
+  "Individuals are experimenting",
+  "A few team workflows use AI",
+  "We have one or more pilots",
+  "We have AI in production",
+  "Not sure",
+];
+
 const BUDGET_OPTIONS = [
-  "Just the audit (from $1,500)",
-  "$2.5k–$5k",
-  "$5k–$15k",
-  "$15k+",
-  "Ongoing monthly support",
+  "AI Opportunity Audit only (from $2.5k)",
+  "$5k–$10k",
+  "$10k–$25k",
+  "$25k–$50k",
+  "$50k+",
+  "Ongoing monthly partnership",
   "Not sure yet",
 ];
 
@@ -772,6 +925,7 @@ type LeadForm = {
   email: string;
   business: string;
   need: string;
+  aiStage: string;
   pain: string;
   tools: string;
   budget: string;
@@ -784,6 +938,7 @@ const emptyLead: LeadForm = {
   email: "",
   business: "",
   need: "",
+  aiStage: "",
   pain: "",
   tools: "",
   budget: "",
@@ -807,17 +962,18 @@ function BookAudit() {
       setForm((prev) => ({ ...prev, [field]: event.target.value }));
 
   const mailtoHref = () => {
-    const subject = `Growth Audit enquiry — ${form.name || "new lead"}`;
+    const subject = `AI opportunity enquiry — ${form.name || "new lead"}`;
     const lines = [
       `Name: ${form.name}`,
       `Email: ${form.email}`,
       `Business: ${form.business}`,
       `Needs help with: ${form.need}`,
+      `Current AI stage: ${form.aiStage}`,
       `Budget: ${form.budget}`,
       `Timeline: ${form.timeline}`,
       `Current tools: ${form.tools}`,
       "",
-      "Biggest pain:",
+      "Business problem or opportunity:",
       form.pain,
     ];
     return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
@@ -852,23 +1008,21 @@ function BookAudit() {
   const firstName = form.name.trim().split(" ")[0];
 
   return (
-    <section className="book" id="book" data-screen-label="Book your audit">
+    <section className="book" id="book" data-screen-label="Start a conversation">
       <span className="book-glow" aria-hidden="true" />
       <div className="book-inner">
-        <SectionTag number="06" label="Book your audit" delayValue="0s" />
+        <SectionTag number="06" label="Start a conversation" delayValue="0s" />
 
         <div className="book-grid">
           <div className="book-lead scroll-reveal" style={delay(".06s")}>
             <h2 className="book-headline">
-              Tell us what&rsquo;s going on —{" "}
-              <span className="accent-cyan">
-                we&rsquo;ll reply within one business day.
-              </span>
+              Tell us where your business is trying to create value with AI.
             </h2>
             <p className="book-body">
-              Share a little about your business and where it hurts. No
-              obligation, no pressure — and you&rsquo;ll leave the audit with a
-              roadmap you keep either way.
+              Share what is slow, repetitive, expensive, hard to scale, or stuck
+              as an experiment. We will reply within one business day and tell
+              you whether a short call, a focused audit, an off-the-shelf tool,
+              or a build makes sense.
             </p>
 
             <ul className="book-points">
@@ -876,8 +1030,15 @@ function BookAudit() {
                 <span className="check-mark" aria-hidden="true">
                   <CheckIcon />
                 </span>
+                <span>The founder reviews every message.</span>
+              </li>
+              <li className="book-point">
+                <span className="check-mark" aria-hidden="true">
+                  <CheckIcon />
+                </span>
                 <span>
-                  A real person reads every message — no bots, no call center.
+                  The first call is about the business problem, not pushing a
+                  predetermined solution.
                 </span>
               </li>
               <li className="book-point">
@@ -885,43 +1046,23 @@ function BookAudit() {
                   <CheckIcon />
                 </span>
                 <span>
-                  A clear next step: a short call to scope your {AUDIT_PRICE}{" "}
-                  Growth Audit.
+                  If an audit makes sense, we define the scope and price before
+                  you commit.
                 </span>
-              </li>
-              <li className="book-point">
-                <span className="check-mark" aria-hidden="true">
-                  <CheckIcon />
-                </span>
-                <span>Your details stay private — never sold, never shared.</span>
               </li>
             </ul>
 
-            {BOOKING_URL || PAYMENT_LINK ? (
+            {BOOKING_URL ? (
               <div className="book-alt">
-                {BOOKING_URL ? (
-                  <a
-                    className="btn btn-ghost"
-                    href={BOOKING_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => track("book_call_click")}
-                  >
-                    Rather pick a time? Book a call{" "}
-                    <span className="arr">→</span>
-                  </a>
-                ) : null}
-                {PAYMENT_LINK ? (
-                  <a
-                    className="btn btn-gold"
-                    href={PAYMENT_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => track("payment_click")}
-                  >
-                    Ready now? Start your audit ({AUDIT_PRICE})
-                  </a>
-                ) : null}
+                <a
+                  className="btn btn-ghost"
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => track("book_call_click")}
+                >
+                  Book an AI Opportunity Call <span className="arr">→</span>
+                </a>
               </div>
             ) : null}
 
@@ -951,7 +1092,7 @@ function BookAudit() {
                     rel="noopener noreferrer"
                     onClick={() => track("book_call_click")}
                   >
-                    Want to go faster? Book a time now
+                    Book an AI Opportunity Call
                   </a>
                 ) : null}
               </div>
@@ -1023,8 +1164,25 @@ function BookAudit() {
                 </label>
 
                 <label className="field">
+                  <span className="field-label">Where are you today with AI?</span>
+                  <select
+                    className="field-input"
+                    name="aiStage"
+                    value={form.aiStage}
+                    onChange={update("aiStage")}
+                  >
+                    <option value="">Select…</option>
+                    {AI_STAGE_OPTIONS.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <label className="field">
                   <span className="field-label">
-                    What&rsquo;s the biggest pain right now?
+                    What business problem or opportunity should we understand?
                   </span>
                   <textarea
                     className="field-input field-textarea"
@@ -1032,7 +1190,7 @@ function BookAudit() {
                     rows={3}
                     value={form.pain}
                     onChange={update("pain")}
-                    placeholder="In your words — what's slow, broken, manual, or unclear?"
+                    placeholder="What is slow, repetitive, expensive, hard to scale, or stuck as a pilot? What result would matter?"
                   />
                 </label>
 
@@ -1082,7 +1240,7 @@ function BookAudit() {
                     name="tools"
                     value={form.tools}
                     onChange={update("tools")}
-                    placeholder="CRM, scheduling, spreadsheets, website…"
+                    placeholder="ChatGPT, Copilot, Claude, Gemini, CRM, help desk, spreadsheets, data warehouse…"
                   />
                 </label>
 
@@ -1107,7 +1265,7 @@ function BookAudit() {
                     "Sending…"
                   ) : (
                     <>
-                      Send &amp; start the conversation{" "}
+                      Send and start the conversation{" "}
                       <span className="arr">→</span>
                     </>
                   )}
@@ -1160,18 +1318,19 @@ function Footer() {
               <span>North Star Pacific</span>
             </div>
             <p className="footer-line">
-              Business technology for growing businesses. We find the gap, build
-              the system, and move the business forward.
+              AI enablement and implementation for growing companies. We find the
+              opportunity, enable the team, build the system, and measure what
+              changed.
             </p>
           </div>
 
           <nav className="footer-nav" aria-label="Footer">
             <a href="#capabilities">What we do</a>
-            <a href="#process">How we work</a>
+            <a href="#process">How it works</a>
             <a href="#trust">Why us</a>
             <a href="#about">About</a>
             <a href="#pricing">Pricing</a>
-            <a href="#book">Book an audit</a>
+            <a href="#audit">AI Opportunity Audit</a>
             <a href="/privacy.html">Privacy</a>
             <a href="/terms.html">Terms</a>
           </nav>
@@ -1180,7 +1339,7 @@ function Footer() {
         <div className="footer-bottom">
           <span className="copyright">© 2026 North Star Pacific</span>
           <span className="footer-tagline">
-            FIND THE GAP · BUILD THE SYSTEM · GROW WITH CLARITY
+            FIND THE OPPORTUNITY · ENABLE THE TEAM · BUILD WHAT MATTERS
           </span>
         </div>
       </div>
@@ -1229,16 +1388,6 @@ function CornerTicks() {
   );
 }
 
-function CodeIcon() {
-  return (
-    <svg viewBox="0 0 24 24">
-      <polyline points="8 7 3 12 8 17" />
-      <polyline points="16 7 21 12 16 17" />
-      <line x1="13.5" y1="5" x2="10.5" y2="19" />
-    </svg>
-  );
-}
-
 function RefreshIcon() {
   return (
     <svg viewBox="0 0 24 24">
@@ -1246,15 +1395,6 @@ function RefreshIcon() {
       <polyline points="18.5 2.5 18.5 6 15 6" />
       <path d="M20.5 12a8.5 8.5 0 0 1-14.4 6.2" />
       <polyline points="5.5 21.5 5.5 18 9 18" />
-    </svg>
-  );
-}
-
-function TrendIcon() {
-  return (
-    <svg viewBox="0 0 24 24">
-      <polyline points="3 16 9 10 13 14 21 6" />
-      <polyline points="15 6 21 6 21 12" />
     </svg>
   );
 }
