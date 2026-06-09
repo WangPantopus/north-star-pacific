@@ -1029,6 +1029,11 @@ footer{
   color: var(--ice-dim);
   max-width: 46ch;
   text-wrap: pretty;
+}
+.audit-scope-note{
+  margin-top: 0.75rem;
+  font-size: clamp(0.92rem, 1.2vw, 1rem);
+  color: var(--slate);
   margin-bottom: 2.2rem;
 }
 

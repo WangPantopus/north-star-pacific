@@ -1,7 +1,7 @@
 {
   "name": "North Star Pacific",
   "short_name": "North Star",
-  "description": "Business technology for growing businesses — custom apps, automation, AI, and dashboards.",
+  "description": "AI enablement and implementation for growing companies — opportunity discovery, team adoption, workflow automation, custom systems, and production support.",
   "icons": [
     { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any" },
     { "src": "/apple-touch-icon.png", "type": "image/png", "sizes": "180x180" },

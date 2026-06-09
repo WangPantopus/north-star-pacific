@@ -36,6 +36,7 @@ type LeadBody = {
   tools?: string;
   budget?: string;
   timeline?: string;
+  aiStage?: string;
   company_website?: string; // honeypot
 };
 
@@ -82,18 +83,20 @@ export default async function handler(req: Req, res: Res) {
   }
 
   const from =
-    process.env.LEAD_FROM_EMAIL ?? "North Star Pacific <onboarding@resend.dev>";
+    process.env.LEAD_FROM_EMAIL ??
+    "North Star Pacific <north-star-pacific@pantopus.com>";
 
   const text = [
     `Name: ${name}`,
     `Email: ${email}`,
     `Business: ${body.business || "—"}`,
     `Needs help with: ${need}`,
+    `Current AI stage: ${body.aiStage || "—"}`,
     `Budget: ${body.budget || "—"}`,
     `Timeline: ${body.timeline || "—"}`,
     `Current tools: ${body.tools || "—"}`,
     "",
-    "Biggest pain:",
+    "Business problem or opportunity:",
     body.pain || "—",
   ].join("\n");
 
@@ -108,7 +111,7 @@ export default async function handler(req: Req, res: Res) {
         from,
         to: [to],
         reply_to: email,
-        subject: `New audit lead — ${name}${body.business ? ` (${body.business})` : ""}`,
+        subject: `New AI opportunity lead — ${name}${body.business ? ` (${body.business})` : ""}`,
         text,
       }),
     });
@@ -132,14 +135,17 @@ export default async function handler(req: Req, res: Res) {
           text: [
             `Hi ${name.split(" ")[0] || "there"},`,
             "",
-            "Thanks for reaching out to North Star Pacific. We've received your message and will get back to you within one business day.",
+            "Thanks for reaching out to North Star Pacific. We received your message and will reply within one business day.",
             "",
             `What you told us you need: ${need}`,
+            `Current AI stage: ${body.aiStage || "—"}`,
             "",
-            "If anything is urgent, just reply to this email.",
+            "Our first step is to understand the business problem and determine whether an existing tool, a focused AI Opportunity Audit, team enablement, or a build is the right next move.",
+            "",
+            "If anything is urgent, reply to this email.",
             "",
             "— North Star Pacific",
-            "Business technology for growing businesses",
+            "AI enablement and implementation for growing companies",
           ].join("\n"),
         }),
       });
