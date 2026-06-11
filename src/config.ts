@@ -15,7 +15,7 @@ export const CONTACT_EMAIL =
 
 /**
  * Scheduling link — a Cal.com or Calendly URL.
- * Empty string = the "Book an AI Opportunity Call" button is hidden.
+ * Empty string = the "Book an AI Opportunity Audit" button is hidden.
  */
 export const BOOKING_URL = env.VITE_BOOKING_URL ?? "";
 

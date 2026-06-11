@@ -297,7 +297,7 @@ footer{
   width: 100%;
   max-width: 1240px;
   margin: 0 auto;
-  padding: 7rem clamp(1.5rem, 5vw, 4rem) 6rem;
+  padding: 5.5rem clamp(1.5rem, 5vw, 4rem) 4.5rem;
 }
 
 .hero-content{ max-width: 780px; }
@@ -338,10 +338,13 @@ footer{
   max-width: 16ch;
   margin-bottom: 1.9rem;
 }
-.headline .grow{
+.headline .grow,
+.accent-gold,
+.audit-headline .audit-em{
   color: var(--gold);
+}
+.headline .grow{
   position: relative;
-  text-shadow: 0 0 28px rgba(240,201,135,0.45);
 }
 
 /* --- subheadline --- */
@@ -475,17 +478,12 @@ footer{
 }
 .section-tag .num{ color: var(--cyan); }
 
-.accent-cyan{
-  color: var(--cyan);
-  text-shadow: 0 0 24px rgba(68,224,206,0.35);
-}
-
 /* ============================================================
    PROBLEM
    ============================================================ */
 .problem{
   position: relative;
-  padding: clamp(7rem, 16vh, 12rem) 0;
+  padding: clamp(4.5rem, 10vh, 8rem) 0;
   overflow: hidden;
 }
 .problem #scatter{
@@ -511,7 +509,7 @@ footer{
   line-height: 1.13;
   letter-spacing: -0.02em;
   color: var(--ice);
-  margin: 2.4rem 0 0;
+  margin: 1.6rem 0 0;
   text-wrap: balance;
 }
 
@@ -519,7 +517,7 @@ footer{
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
-  margin: 2.6rem 0;
+  margin: 1.75rem 0;
 }
 .maybe{
   font-family: var(--font-display);
@@ -545,7 +543,11 @@ footer{
    ============================================================ */
 .capabilities{
   position: relative;
-  padding: clamp(6rem, 13vh, 9.5rem) 0;
+  padding: clamp(3.75rem, 8vh, 6rem) 0;
+}
+.capabilities.use-cases{
+  padding-top: clamp(1.25rem, 3vh, 2rem);
+  padding-bottom: clamp(3.75rem, 8vh, 6rem);
 }
 .cap-inner{
   position: relative;
@@ -558,7 +560,7 @@ footer{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.4rem;
-  margin-top: 3.2rem;
+  margin-top: 2.1rem;
 }
 
 .card{
@@ -641,7 +643,7 @@ footer{
    ============================================================ */
 .pricing{
   position: relative;
-  padding: clamp(5rem, 12vh, 8.5rem) 0;
+  padding: clamp(3.5rem, 8vh, 6rem) 0;
 }
 .pricing-inner{
   position: relative;
@@ -652,7 +654,7 @@ footer{
 }
 
 .price-table{
-  margin-top: clamp(2.4rem, 5vw, 3.2rem);
+  margin-top: clamp(1.6rem, 3.5vw, 2.15rem);
   border-radius: 18px;
   overflow: hidden;
   border: 1px solid var(--hairline);
@@ -746,7 +748,6 @@ footer{
 }
 .price-row.is-audit .pr-fig{
   color: var(--gold);
-  text-shadow: 0 0 22px rgba(240,201,135,0.4);
 }
 
 .price-note{
@@ -763,7 +764,7 @@ footer{
    ============================================================ */
 .trust{
   position: relative;
-  padding: clamp(6rem, 13vh, 9.5rem) 0;
+  padding: clamp(4rem, 8vh, 6.5rem) 0;
 }
 .trust-inner{
   position: relative;
@@ -779,7 +780,7 @@ footer{
   line-height: 1.12;
   letter-spacing: -0.022em;
   color: var(--ice);
-  margin: 1.7rem 0 0;
+  margin: 1.15rem 0 0;
   max-width: 20ch;
   text-wrap: balance;
 }
@@ -787,12 +788,12 @@ footer{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.4rem;
-  margin-top: clamp(2.8rem, 5vw, 3.6rem);
+  margin-top: clamp(1.85rem, 3.5vw, 2.4rem);
 }
 
 /* prominent sample-audit link */
 .trust-cta{
-  margin-top: clamp(2.8rem, 5vw, 3.6rem);
+  margin-top: clamp(1.85rem, 3.5vw, 2.4rem);
   display: flex;
   justify-content: center;
 }
@@ -823,7 +824,129 @@ footer{
 .sample-link:hover .sl-arr{ transform: translateX(3px); }
 .sample-link .sl-main{
   color: var(--cyan);
-  text-shadow: 0 0 22px rgba(68,224,206,0.30);
+}
+
+/* ============================================================
+   WORK — shipped proof
+   ============================================================ */
+.work{
+  position: relative;
+  padding: clamp(3rem, 7vh, 5.5rem) 0;
+}
+.work-inner{
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+}
+.work-intro{
+  margin-top: clamp(1.25rem, 2.5vw, 1.75rem);
+  max-width: 52ch;
+  font-size: clamp(1.05rem, 1.5vw, 1.22rem);
+  line-height: 1.58;
+  color: var(--ice-dim);
+}
+.work-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.4rem;
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+  max-width: 720px;
+}
+.work-card{
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.work-card-tag{
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 0.32rem 0.62rem;
+  border-radius: 999px;
+  border: 1px solid rgba(68,224,206,0.35);
+  background: var(--cyan-soft);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.work-card-cta{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.35rem;
+  color: var(--cyan);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .2s var(--ease), transform .2s var(--ease);
+}
+.work-card-cta:hover{
+  color: #59ECDA;
+  transform: translateX(2px);
+}
+.work-card-cta .arr{
+  transition: transform .25s var(--ease);
+}
+.work-card-cta:hover .arr{
+  transform: translateX(3px);
+}
+
+/* ============================================================
+   SCAN BANNER — audit alternative CTA
+   ============================================================ */
+.scan-banner{
+  position: relative;
+  padding: clamp(1.5rem, 4vh, 2.5rem) 0;
+}
+.scan-banner-inner{
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+}
+.scan-banner-card{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem 1.25rem;
+  padding: 1rem 1.25rem;
+}
+.scan-banner-eyebrow{
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--slate);
+  white-space: nowrap;
+}
+.scan-banner-line{
+  flex: 1 1 16rem;
+  min-width: 0;
+  margin: 0;
+  font-size: clamp(0.98rem, 1.4vw, 1.08rem);
+  line-height: 1.45;
+  color: var(--ice-dim);
+}
+.scan-banner-cta{
+  flex: none;
+  margin-left: auto;
+  padding: 0.72rem 1.1rem;
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px){
+  .scan-banner-card{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .scan-banner-cta{
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* ============================================================
@@ -831,7 +954,7 @@ footer{
    ============================================================ */
 .process{
   position: relative;
-  padding: clamp(6rem, 14vh, 10rem) 0;
+  padding: clamp(3rem, 7vh, 5.5rem) 0;
 }
 .process-inner{
   position: relative;
@@ -845,7 +968,7 @@ footer{
   position: relative;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  margin-top: clamp(3rem, 6vw, 4.6rem);
+  margin-top: clamp(1.75rem, 3.5vw, 2.75rem);
 }
 
 /* the faint glowing route running through the steps */
@@ -924,7 +1047,7 @@ footer{
    ============================================================ */
 .audit{
   position: relative;
-  padding: clamp(6rem, 14vh, 11rem) 0 clamp(7rem, 16vh, 12rem);
+  padding: clamp(4rem, 9vh, 7.5rem) 0 clamp(4.5rem, 10vh, 8rem);
   overflow: hidden;
 }
 
@@ -1004,7 +1127,6 @@ footer{
   height: 7px;
   border-radius: 50%;
   background: var(--gold);
-  box-shadow: 0 0 12px 2px rgba(240,201,135,0.75);
   animation: dotPulse 3.4s var(--ease) infinite;
 }
 
@@ -1018,11 +1140,6 @@ footer{
   text-wrap: balance;
   margin-bottom: 1.5rem;
 }
-.audit-headline .audit-em{
-  color: var(--gold);
-  text-shadow: 0 0 28px rgba(240,201,135,0.38);
-}
-
 .audit-body{
   font-size: clamp(1.02rem, 1.4vw, 1.16rem);
   line-height: 1.62;
@@ -1065,7 +1182,6 @@ footer{
   font-size: clamp(2.4rem, 5vw, 3.6rem);
   color: var(--gold);
   letter-spacing: -0.03em;
-  text-shadow: 0 0 34px rgba(240,201,135,0.40);
   margin-left: 0.18em;
 }
 
@@ -1125,7 +1241,6 @@ footer{
   color: var(--gold);
   background: rgba(240,201,135,0.10);
   border: 1px solid rgba(240,201,135,0.28);
-  box-shadow: 0 0 16px -6px rgba(240,201,135,0.5);
 }
 .check-mark svg{
   width: 14px; height: 14px;
@@ -1147,7 +1262,7 @@ footer{
    ============================================================ */
 .final-cta{
   position: relative;
-  padding: clamp(7rem, 16vh, 12rem) 0;
+  padding: clamp(4.5rem, 10vh, 8rem) 0;
   overflow: hidden;
   text-align: center;
 }
@@ -1231,7 +1346,7 @@ footer{
 .footer-inner{
   max-width: 1240px;
   margin: 0 auto;
-  padding: clamp(3.5rem, 7vw, 5rem) clamp(1.5rem, 5vw, 4rem) clamp(2rem, 4vw, 2.6rem);
+  padding: clamp(2.5rem, 5vw, 3.5rem) clamp(1.5rem, 5vw, 4rem) clamp(1.5rem, 3vw, 1.75rem);
 }
 .footer-top{
   display: flex;
@@ -1410,7 +1525,7 @@ footer{
 }
 @media (max-width: 720px){
   body{ font-size: 16px; }
-  .hero-inner{ padding: 6rem 1.4rem 4rem; }
+  .hero-inner{ padding: 5rem 1.4rem 3.5rem; }
   .headline{ font-size: clamp(2.3rem, 9vw, 3.2rem); }
   .hud-corner{ display:none; }
 }
@@ -1428,7 +1543,7 @@ footer{
    ============================================================ */
 .book{
   position: relative;
-  padding: clamp(4rem, 9vw, 7rem) 0 clamp(4.5rem, 9vw, 7rem);
+  padding: clamp(2.75rem, 6vw, 5rem) 0 clamp(3rem, 6vw, 5rem);
   overflow: hidden;
 }
 .book-glow{
@@ -1453,7 +1568,7 @@ footer{
   grid-template-columns: 0.9fr 1.1fr;
   gap: clamp(2rem, 5vw, 4rem);
   align-items: start;
-  margin-top: clamp(1.8rem, 4vw, 2.8rem);
+  margin-top: clamp(1.2rem, 2.75vw, 1.85rem);
 }
 .book-headline{
   font-family: var(--font-display);
@@ -1643,7 +1758,7 @@ select.field-input{
    ============================================================ */
 .faq{
   position: relative;
-  padding: clamp(3.5rem, 8vw, 6rem) 0;
+  padding: clamp(2.5rem, 5.5vw, 4rem) 0;
 }
 .faq-inner{
   max-width: 880px;
@@ -1655,7 +1770,7 @@ select.field-input{
   font-weight: 700;
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   letter-spacing: -0.01em;
-  margin: 0.5rem 0 1.8rem;
+  margin: 0.5rem 0 1.2rem;
 }
 .faq-list{ display: grid; gap: 0.75rem; }
 .faq-item{
@@ -1747,7 +1862,7 @@ main:focus{ outline: none; }
    ============================================================ */
 .about{
   position: relative;
-  padding: clamp(3.5rem, 8vw, 6.5rem) 0;
+  padding: clamp(2.5rem, 5.5vw, 4.5rem) 0;
 }
 .about-inner{
   max-width: 1140px;
@@ -1759,7 +1874,7 @@ main:focus{ outline: none; }
   grid-template-columns: 1.1fr 0.9fr;
   gap: clamp(2rem, 5vw, 4rem);
   align-items: start;
-  margin-top: 1.7rem;
+  margin-top: 1.15rem;
 }
 .about-headline{
   font-family: var(--font-display);
