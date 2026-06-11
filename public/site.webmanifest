@@ -1,7 +1,7 @@
 {
   "name": "North Star Pacific",
   "short_name": "North Star",
-  "description": "AI enablement and implementation for growing companies — opportunity discovery, team adoption, workflow automation, custom systems, and production support.",
+  "description": "AI, built into your business — and shipped. Opportunity discovery, workflow automation, custom systems, and production implementation for growing companies.",
   "icons": [
     { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any" },
     { "src": "/apple-touch-icon.png", "type": "image/png", "sizes": "180x180" },
